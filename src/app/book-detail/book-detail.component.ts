@@ -9,12 +9,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BookDetailComponent implements OnInit {
 
-  book = {};
+  book: any = {};
 
   constructor(private route: ActivatedRoute,
               private http: HttpClient) { }
 
   ngOnInit() {
+    this.getBookDetail(this.route.snapshot.params['id']);
   }
 
+  getBookDetail(id) {
+    this.http.get('/book/' + id).subscribe(data => {
+      this.book = data;
+    });
+  }
 }
