@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { BookComponent } from './book/book.component';
 import { BookDetailComponent } from './book-detail/book-detail.component';
+import { BookCreateComponent } from './book-create/book-create.component';
 
 const appRoutes: Routes = [
   {
@@ -20,6 +21,11 @@ const appRoutes: Routes = [
     data: {title: 'Book Details'}
   },
   {
+    path: 'book-create',
+    component: BookCreateComponent,
+    data: {title: 'Create Book'}
+  },
+  {
     path: '',
     redirectTo: '/books',
     pathMatch: 'full'
@@ -30,7 +36,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     BookComponent,
-    BookDetailComponent
+    BookDetailComponent,
+    BookCreateComponent
   ],
   imports: [
     BrowserModule,
