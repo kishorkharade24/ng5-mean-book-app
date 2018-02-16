@@ -7,7 +7,6 @@ var mongoose = require('mongoose');
 
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost/ng5-mean', {
-  useMongoClient: true,
   promiseLibrary: require('bluebird')
 })
   .then(() => console.log('Connected to mongoDB.'))

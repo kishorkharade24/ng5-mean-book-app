@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+
+import { BookService } from '../shared/book.service';
 
 @Component({
   selector: 'app-book-edit',
@@ -12,26 +13,39 @@ export class BookEditComponent implements OnInit {
 
   book: any = {};
 
-  constructor(private http: HttpClient,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private bookService: BookService) { }
 
   ngOnInit() {
     this.getBook(this.route.snapshot.params['id']);
   }
 
+  /**
+   * Get book
+   * @param id
+   */
   getBook(id) {
-    this.http.get('/book/' + id).subscribe(data => {
-      this.book = data;
-    });
+    this.bookService.getBookDetail(id)
+      .subscribe(data => {
+        this.book = data;
+      }, (err) => {
+        console.log('Error while getting book details: ' + err);
+      });
   }
 
+  /**
+   * Update book
+   * @param id
+   * @param data
+   */
   updateBook(id, data) {
-    this.http.put('/book/' + id, data).subscribe(res => {
-      const id = res['id'];
-      this.router.navigate(['/book-details', id]);
-    }, (err) => {
-      console.log(err);
-    });
+    this.bookService.updateBook(id, data)
+      .subscribe(res => {
+        const id = res['id'];
+        this.router.navigate(['/book-details', id]);
+      }, (err) => {
+        console.log('Error while updating book: ' + err);
+      });
   }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
+
+import { BookService } from '../shared/book.service';
 
 @Component({
   selector: 'app-book',
@@ -9,12 +11,22 @@ import { HttpClient } from '@angular/common/http';
 export class BookComponent implements OnInit {
   books: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private bookService: BookService) { }
 
   ngOnInit() {
-    this.http.get('/book').subscribe(data => {
-      this.books = data;
-    });
+    this.getAllBooks();
+  }
+
+  /**
+   * Get all books
+   */
+  getAllBooks() {
+    this.bookService.getAllBooks()
+      .subscribe(books => {
+        this.books = books;
+      }, (err) => {
+        console.log('Error while getting all books.');
+      });
   }
 
 }
