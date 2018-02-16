@@ -30,7 +30,7 @@ export class BookDetailComponent implements OnInit {
       .subscribe(data => {
         this.book = data;
       }, (err) => {
-        console.log('Error while getting book details: ' + err);
+        console.log('Error while getting book details: ' + JSON.stringify(err));
       });
   }
 
@@ -43,7 +43,7 @@ export class BookDetailComponent implements OnInit {
       .subscribe(res => {
         this.router.navigate(['/books']);
       }, (err) => {
-        console.log(err);
+        console.log('Error while deleting book: ' + JSON.stringify(err));
       });
   }
 }

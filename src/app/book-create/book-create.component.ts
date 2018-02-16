@@ -25,10 +25,10 @@ export class BookCreateComponent implements OnInit {
   saveBook() {
     this.bookService.saveBook(this.book)
       .subscribe(res => {
-        const id = res['id'];
+        const id = res['_id'];
         this.router.navigate(['/book-details', id]);
       }, (err) => {
-        console.log('Error while saving book: ' + err);
+        console.log('Error while saving book: ' + JSON.stringify(err));
       });
   }
 }

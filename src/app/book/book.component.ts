@@ -25,7 +25,7 @@ export class BookComponent implements OnInit {
       .subscribe(books => {
         this.books = books;
       }, (err) => {
-        console.log('Error while getting all books.');
+        console.log('Error while getting all books: ' + JSON.stringify(err));
       });
   }
 
